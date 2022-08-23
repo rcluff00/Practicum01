@@ -36,3 +36,13 @@ function showHideLog(log) {
   if (logText.style.display != 'none') logText.style.display = 'none';
   else logText.style.display = 'block';
 }
+
+async function getStuff(src) {
+  let myObject = await fetch(src);
+  alert(myObject);
+  console.log(myObject);
+}
+
+getStuff(
+  'https://json-server-ft3qa5--3000.local.webcontainer.io/api/v1/courses'
+);
