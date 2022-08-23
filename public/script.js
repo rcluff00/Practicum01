@@ -37,12 +37,18 @@ function showHideLog(log) {
   else logText.style.display = 'block';
 }
 
+let courseSelect = document.getElementById('course');
+let courseOptions = courseSelect.options;
+let courseOptionsLen = courseOptions.length;
+for (let i = 1; i < courseOptionsLen; i++) {
+  courseSelect.remove(i);
+}
+
 async function getStuff(src) {
-  let myObject = await fetch(src);
-  alert(myObject);
-  console.log(myObject);
+  let response = await fetch(src);
+  let myJson = await response.json();
 }
 
 getStuff(
-  'https://json-server-ft3qa5--3000.local.webcontainer.io/api/v1/courses'
+  'https://json-server-5phigi--3000.local.webcontainer.io/api/v1/courses'
 );
