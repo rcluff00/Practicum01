@@ -10,13 +10,14 @@ uvuIdInput.value = '10234567';
 courseDropdown.onchange = function () {
   if (courseDropdown.selectedIndex != 0) {
     uvuIdInputDiv.style.display = 'block';
+    checkUvuId();
   } else {
     uvuIdInputDiv.style.display = 'none';
   }
 };
 
 // check uvuId for proper input
-uvuIdInput.addEventListener('input', function () {
+function checkUvuId() {
   input = uvuIdInput.value;
   let regex = /^[0-9]{0,8}$/gm;
   if (!regex.test(input)) {
@@ -27,7 +28,8 @@ uvuIdInput.addEventListener('input', function () {
       replaceLogs();
     }
   }
-});
+}
+uvuIdInput.addEventListener('input', checkUvuId);
 
 let logs = document.querySelectorAll('ul li');
 for (let i = 0; i < logs.length; i++) {
@@ -70,19 +72,20 @@ async function replaceCourseSelect() {
 async function replaceLogs() {
   let courseId = document.getElementById('course').value;
   let studentNum = document.getElementById('uvuId').value;
-  // let json = await fetchJson(
-  //   `https://json-server-5phigi--3000.local.webcontainer.io/logs?courseId=${courseId}&uvuId=${studentNum}`
-  // );
+  let json = await fetchJson(
+    `https://json-server-5phigi--3000.local.webcontainer.io/logs?courseId=${courseId}&uvuId=${studentNum}`
+  );
+  console.log('json: ' + json);
 
-  let url = `https://json-server-5phigi--3000.local.webcontainer.io/logs?courseId=${courseId}&uvuId=${studentNum}`;
+  let url = `https://json-server-5phigi--3000.local.webcontainer.io/logs?courseId=${courseId}&uvuId=${studentNum}&t=${Math.random()}`;
   console.log('url: ' + url);
 
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function () {
-    console.log(this.status);
-    console.log('this: ' + this);
+    console.log('this.status: ' + this.status);
+    console.log('this.response: ' + this.response);
   };
-  xhttp.open('GET', url);
+  xhttp.open('GET', url, true);
   xhttp.send();
 }
 

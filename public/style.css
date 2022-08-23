@@ -3,6 +3,18 @@
 html {
   font-size: 16px;
 }
+
+body {
+  background-color: white;
+}
+
+form {
+  max-width: 45rem;
+  background-color: rgb(222, 233, 243);
+  padding: 1rem;
+  border-radius: 0.25rem;
+  margin: 0 auto;
+}
 input,
 textarea,
 select {
@@ -11,7 +23,8 @@ select {
   max-width: 100%;
   height: 2rem;
   padding: 0.125rem;
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
+  border: none;
   box-sizing: border-box;
   font-size: 16px;
   border-radius: 0.25rem;
@@ -63,7 +76,9 @@ ul pre p {
 
 ul li {
   padding: 0.5rem 0.75rem;
-  border: solid 1px rgb(84, 154, 197);
+  /* border: solid 1px rgb(84, 154, 197); */
+  border: none;
+  background-color: white;
   margin-bottom: 0.5rem;
   border-radius: 0.25rem;
   transition: all 0.5s ease;
