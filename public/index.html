@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!-- TODO: set the lang attribute to American English -->
+  <!-- X TODO: set the lang attribute to American English -->
   <head>
     <title>Student Log</title>
-    <!-- TODO: set the characterset to utf8 -->
+    <!-- X TODO: set the characterset to utf8 -->
     <meta charset="UTF-8" />
-    <!-- TODO: temporarily use stackoverflow's favicon. "https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico"-->
+    <!-- X TODO: temporarily use stackoverflow's favicon. "https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico"-->
     <link
       rel="shortcut icon"
       href="https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico"
       type="image/x-icon"
     />
-    <!-- TODO: Load your CSS file -->
+    <!-- X TODO: Load your CSS file -->
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
@@ -31,21 +31,23 @@
         <option value="cs3380">CS 3380</option></select
       ><br />
 
-      <!-- TODO: Don't show the uvu id text input box until a course was selected above. -->
-      <!-- TODO: If course ever becomes unselected, don't show the uvu id text input box.-->
-      <label for="uvuId">UVU ID</label><br />
-      <!-- TODO: write `10234567` as sample data on the input field below  -->
-      <!-- TODO: Ensure the character length never exceeds 8 -->
-      <!-- TODO: Only numbers, no letters or other characters-->
-      <!-- TODO: When character length reaches 8 and it's only digits, fire off ajax request, if 200 or 304, display results, else appropriately guide the user. -->
-      <input type="text" id="uvuId" name="uvuId" data-cy="uvuId_input" />
+      <!-- X TODO: Don't show the uvu id text input box until a course was selected above. -->
+      <!-- X TODO: If course ever becomes unselected, don't show the uvu id text input box.-->
+      <div class="uvu-id">
+        <label for="uvuId">UVU ID</label><br />
+        <!-- TODO: write `10234567` as sample data on the input field below  -->
+        <!-- X TODO: Ensure the character length never exceeds 8 -->
+        <!-- X TODO: Only numbers, no letters or other characters-->
+        <!-- TODO: When character length reaches 8 and it's only digits, fire off ajax request, if 200 or 304, display results, else appropriately guide the user. -->
+        <input type="text" id="uvuId" name="uvuId" data-cy="uvuId_input" />
+      </div>
       <!-- TODO: The following options are currently static values to show you an example.  -->
       <!-- You must replace them with dynamic data by ajaxing GET https://json-server-ft3qa5--3000.local.webcontainer.io/logs?courseId=<courseID>&uvuId=<uvuID> -->
       <h3 id="uvuIdDisplay" data-cy="uvuIdDisplay">
-        Studnet Logs for 10234567
+        Student Logs for 10234567
       </h3>
       <ul data-cy="logs">
-        <!-- TODO: Click anywhere on the log to toggle visibility of the log (text only, not the date)-->
+        <!-- X TODO: Click anywhere on the log to toggle visibility of the log (text only, not the date)-->
         <li>
           <div><small>1/23/2021 1:23:36 PM</small></div>
           <pre><p>Initial comment. Hello World</p></pre>
@@ -69,7 +71,7 @@
       <!-- TODO: Button should be disabled until there are logs displayed -->
       <button type="submit" data-cy="add_log_btn">Add Log</button>
     </form>
-    <!-- TODO: Script tag to your javascript file -->
+    <!-- X TODO: Script tag to your javascript file -->
     <script src="script.js"></script>
   </body>
   <!-- TODO: add appropriate comments you feel are necessary, if any, for the next coder to understand -->
