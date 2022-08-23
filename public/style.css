@@ -1,2 +1,18 @@
 /* TODO: make it look awesome. */
 /* TODO: make it responsive. */
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+ul small {
+  font-weight: 400;
+}
+
+ul pre {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
