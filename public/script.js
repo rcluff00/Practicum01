@@ -2,8 +2,9 @@ let uvuIdInputDiv = document.getElementsByClassName('uvu-id')[0];
 let uvuIdInput = document.getElementById('uvuId');
 let courseDropdown = document.getElementById('course');
 let logsDiv = document.querySelector('.logs-div');
-
 logsDiv.style.display = 'none';
+
+document.getElementById('logForm').addEventListener('submit', postLog);
 
 // show uvuId textbox after course is selected
 courseDropdown.onchange = function () {
@@ -73,7 +74,7 @@ async function replaceLogs() {
   let courseId = document.getElementById('course').value;
   let uvuId = document.getElementById('uvuId').value;
   let json = await fetchJson(
-    `https://json-server-5phigi--3000.local.webcontainer.io/logs?courseId=${courseId}&uvuId=${uvuId}`
+    `https://json-server-5phigi--3000.local.webcontainer.io/api/v1/logs?courseId=${courseId}&uvuId=${uvuId}`
   );
 
   //print log info
@@ -99,24 +100,32 @@ async function replaceLogs() {
   document.querySelector('button').disabled = false;
 }
 
-// function postData(url, data) {
-//   fetch(url, {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify(data),
-//   });
-// }
+function postData(url, data) {
+  fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+}
 
-// let testUrl =
-//   'https://json-server-5phigi--3000.local.webcontainer.io/api/v1/logs';
-// let testData = {
-//   courseId: 'cs666',
-//   uvuId: '10666666',
-//   date: '1/23/2021 1:23:36 PM',
-//   text: 'COVFEFE',
-//   id: '420',
-// };
-// postData(testUrl, testData);
+function postLog(event) {
+  let json = {};
+  event.preventDefault();
+  json.text = document.getElementById('logBody').value;
+  json.courseId = courseDropdownvalue;
+  json.uvuId = uvuIdInput.value;
+
+}
+
+let testUrl =
+  'https://json-server-5phigi--3000.local.webcontainer.io/api/v1/logs';
+let testData = {
+  courseId: 'cs666',
+  uvuId: '10666666',
+  date: '1/23/2021 1:23:36 PM',
+  text: 'COVFEFE',
+  id: '420',
+};
 
 // return json from fetch
 async function fetchJson(src) {
