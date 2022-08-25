@@ -12,10 +12,14 @@ body {
 
 form {
   max-width: 45rem;
-  background-color: rgb(27, 30, 32);
-  padding: 1rem;
-  border-radius: 0.25rem;
   margin: 0 auto;
+}
+
+.form-section {
+  padding: 1rem;
+  background-color: rgb(27, 30, 32);
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
 }
 
 input,
@@ -28,7 +32,6 @@ select {
   padding: 0.125rem;
   background-color: rgb(10, 12, 14);
   color: white;
-  /* border: 1px solid grey; */
   border: none;
   box-sizing: border-box;
   font-size: 16px;
@@ -42,11 +45,11 @@ input {
 h3 {
   margin-top: 0;
   margin-bottom: 0.5rem;
-  color: rgb(84, 154, 197);
+  color: rgb(151 208 244);
 }
 
 label {
-  color: grey;
+  color: rgb(129 142 150);
   margin-bottom: 0.25rem;
   display: inline-block;
   font-weight: 600;
@@ -55,11 +58,6 @@ label {
 div.uvu-id {
   display: none;
   width: 100%;
-}
-
-div.logs-div {
-  border-top: solid 1px rgb(84, 154, 197);
-  padding-top: 1rem;
 }
 
 ul {
@@ -71,7 +69,7 @@ ul {
 ul small {
   font-weight: 600;
   font-size: 1rem;
-  color: rgb(84, 154, 197);
+  color: rgb(151 208 244);
 }
 
 ul pre {
@@ -89,7 +87,7 @@ ul pre p {
 
 ul li {
   padding: 0.5rem 0.75rem;
-  /* border: solid 1px rgb(84, 154, 197); */
+  /* border: solid 1px rgb(151 208 244); */
   border: none;
   background-color: rgb(49, 53, 56);
   margin-bottom: 0.5rem;
@@ -100,7 +98,7 @@ ul li {
 button {
   border-radius: 0.25rem;
   padding: 0.5rem 1rem;
-  background-color: rgb(84, 154, 197);
+  background-color: rgb(151 208 244);
   border: none;
   color: white;
 }
@@ -110,5 +108,5 @@ button:hover {
 button:disabled,
 button[disabled] {
   background-color: rgb(44, 51, 58);
-  color: grey;
+  color: rgb(129 142 150);
 }

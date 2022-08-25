@@ -1,96 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!-- X TODO: set the lang attribute to American English -->
   <head>
     <title>Student Log</title>
-    <!-- X TODO: set the characterset to utf8 -->
     <meta charset="UTF-8" />
-    <!-- X TODO: temporarily use stackoverflow's favicon. "https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico"-->
     <link
       rel="shortcut icon"
       href="https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico"
       type="image/x-icon"
     />
-    <!-- X TODO: Load your CSS file -->
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <form id="logForm">
-      <label for="course">Course</label><br />
-      <select
-        aria-label="Select Course"
-        id="course"
-        name="course"
-        data-cy="course_select"
-      >
-        <!-- X TODO: The following options are currently static values to show you sample data.  -->
-        <!-- Use fetch to replace them with dynamic data from GET https://json-server-ft3qa5--3000.local.webcontainer.io/api/v1/courses -->
-        <!-- Use your own unique URL you recorded, not the sample one above. -->
-        <option selected value="">Choose Courses</option>
-        <option value="cs4690">CS 4690</option>
-        <option value="cs4660">CS 4660</option>
-        <option value="cs3380">CS 3380</option></select
-      ><br />
+      <section class="form-section">
+        <label for="course">Course</label><br />
+        <select
+          aria-label="Select Course"
+          id="course"
+          name="course"
+          data-cy="course_select"
+        >
+          <option selected value="">Choose Courses</option>
+          <option value="cs4690">CS 4690</option>
+          <option value="cs4660">CS 4660</option>
+          <option value="cs3380">CS 3380</option></select
+        ><br />
 
-      <!-- X TODO: Don't show the uvu id text input box until a course was selected above. -->
-      <!-- X TODO: If course ever becomes unselected, don't show the uvu id text input box.-->
-      <div class="uvu-id">
-        <label for="uvuId">UVU ID</label><br />
-        <!-- TODO: write `10234567` as sample data on the input field below  -->
-        <!-- X TODO: Ensure the character length never exceeds 8 -->
-        <!-- X TODO: Only numbers, no letters or other characters-->
-        <!-- TODO: When character length reaches 8 and it's only digits, fire off ajax request, if 200 or 304, display results, else appropriately guide the user. -->
-        <input
-          type="text"
-          id="uvuId"
-          name="uvuId"
-          data-cy="uvuId_input"
-          maxlength="8"
-          pattern="[0-9]{0,8}"
-          placeholder="10234567"
-        />
-      </div>
-      <!-- TODO: The following options are currently static values to show you an example.  -->
-      <!-- You must replace them with dynamic data by ajaxing GET https://json-server-ft3qa5--3000.local.webcontainer.io/logs?courseId=<courseID>&uvuId=<uvuID> -->
-      <div class="logs-div">
-        <h3 id="uvuIdDisplay" data-cy="uvuIdDisplay">
-          Student Logs for <span id="uvuIdSpan">10234567</span>
-        </h3>
-        <ul data-cy="logs" id="logsUl">
-          <!-- X TODO: Click anywhere on the log to toggle visibility of the log (text only, not the date)-->
-          <li>
-            <div><small>1/23/2021 1:23:36 PM</small></div>
-            <pre><p>Initial comment. Hello World</p></pre>
-          </li>
-          <li>
-            <div><small>1/24/2021 2:43:12 PM</small></div>
-            <pre><p>MongoDB is looking really good, still need to get atlas up and running.</p></pre>
-          </li>
-          <li>
-            <div><small>1/27/2021 5:58:10 PM</small></div>
-            <pre><p>Atlas is up and running</p></pre>
-          </li>
-        </ul>
-      </div>
-      <label>New Log</label><br />
-      <textarea
-        id="logBodyInput"
-        style="height: 75px"
-        aria-label="add log textarea"
-        data-cy="log_textarea"
-      ></textarea
-      ><br />
-      <!-- TODO: Button should be disabled until there are logs displayed -->
-      <!-- 1. Use fetch to post the new log above -->
-      <!-- 2. Add it to the displayed list -->
-      <button id="submit" type="submit" data-cy="add_log_btn" disabled>
-        Add Log
-      </button>
+        <div class="uvu-id">
+          <label for="uvuId">UVU ID</label><br />
+
+          <input
+            type="text"
+            id="uvuId"
+            name="uvuId"
+            data-cy="uvuId_input"
+            maxlength="8"
+            pattern="[0-9]{0,8}"
+            placeholder="10234567"
+          />
+        </div>
+      </section>
+
+      <section class="form-section">
+        <div class="logs-div">
+          <h3 id="uvuIdDisplay" data-cy="uvuIdDisplay">
+            Student Logs for <span id="uvuIdSpan">10234567</span>
+          </h3>
+          <ul data-cy="logs" id="logsUl">
+            <li>
+              <div><small>1/23/2021 1:23:36 PM</small></div>
+              <pre><p>Initial comment. Hello World</p></pre>
+            </li>
+            <li>
+              <div><small>1/24/2021 2:43:12 PM</small></div>
+              <pre><p>MongoDB is looking really good, still need to get atlas up and running.</p></pre>
+            </li>
+            <li>
+              <div><small>1/27/2021 5:58:10 PM</small></div>
+              <pre><p>Atlas is up and running</p></pre>
+            </li>
+          </ul>
+        </div>
+        <label>New Log</label><br />
+        <textarea
+          id="logBodyInput"
+          style="height: 75px"
+          aria-label="add log textarea"
+          data-cy="log_textarea"
+        ></textarea
+        ><br />
+
+        <button id="submit" type="submit" data-cy="add_log_btn" disabled>
+          Add Log
+        </button>
+      </section>
     </form>
-    <!-- X TODO: Script tag to your javascript file -->
     <script src="script.js"></script>
   </body>
-  <!-- TODO: add appropriate comments you feel are necessary, if any, for the next coder to understand -->
 </html>
 
-<!-- TODO: move all TODOs that done above to down below here and change the label to DONE:. -->
+<!-- DONE: move all TODOs that done above to down below here and change the label to DONE:. -->
+<!-- DONE: set the lang attribute to American English -->
+<!-- DONE: set the characterset to utf8 -->
+<!-- DONE: temporarily use stackoverflow's favicon. "https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico"-->
+<!-- DONE: Load your CSS file -->
+<!-- DONE: Click anywhere on the log to toggle visibility of the log (text only, not the date)-->
+<!-- DONE: Script tag to your javascript file -->
+<!-- DONE: Button should be disabled until there are logs displayed -->
+<!-- 1. Use fetch to post the new log above -->
+<!-- 2. Add it to the displayed list -->
+<!-- DONE: The following options are currently static values to show you sample data.  -->
+<!-- Use fetch to replace them with dynamic data from GET https://json-server-ft3qa5--3000.local.webcontainer.io/api/v1/courses -->
+<!-- Use your own unique URL you recorded, not the sample one above. -->
+<!-- DONE: Don't show the uvu id text input box until a course was selected above. -->
+<!-- DONE: If course ever becomes unselected, don't show the uvu id text input box.-->
+<!-- DONE: The following options are currently static values to show you an example.  -->
+<!-- You must replace them with dynamic data by ajaxing GET https://json-server-ft3qa5--3000.local.webcontainer.io/logs?courseId=<courseID>&uvuId=<uvuID> -->
+<!-- DONE: write `10234567` as sample data on the input field below  -->
+<!-- DONE: Ensure the character length never exceeds 8 -->
+<!-- DONE: Only numbers, no letters or other characters-->
+<!-- DONE: When character length reaches 8 and it's only digits, fire off ajax request, if 200 or 304, display results, else appropriately guide the user. -->
+<!-- DONE: add appropriate comments you feel are necessary, if any, for the next coder to understand -->

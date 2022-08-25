@@ -1,6 +1,6 @@
 let uvuIdInputDiv = document.getElementsByClassName('uvu-id')[0];
 let uvuIdInput = document.getElementById('uvuId');
-let courseDropdown = document.getElementById('course');
+let courseInput = document.getElementById('course');
 let logsDiv = document.querySelector('.logs-div');
 logsDiv.style.display = 'none';
 
@@ -11,10 +11,10 @@ document.getElementById('logForm').addEventListener('submit', function (event) {
 document.getElementById('submit').addEventListener('click', postLog);
 
 // show uvuId textbox after course is selected
-courseDropdown.onchange = function () {
-  if (courseDropdown.selectedIndex != 0) {
+courseInput.onchange = function () {
+  if (courseInput.selectedIndex != 0) {
     uvuIdInputDiv.style.display = 'block';
-    // checkUvuId();
+    checkUvuId();
   } else {
     uvuIdInputDiv.style.display = 'none';
   }
@@ -22,30 +22,32 @@ courseDropdown.onchange = function () {
 
 // check uvuId for proper input
 function checkUvuId() {
-  input = uvuIdInput.value;
+  uvuId = uvuIdInput.value;
 
-  if (input.length == 8) {
+  if (uvuId.length == 8) {
     refreshLogs();
   }
 }
 uvuIdInput.addEventListener('input', checkUvuId);
 
-let logs = document.querySelectorAll('ul li');
-for (let i = 0; i < logs.length; i++) {
-  logs[i].addEventListener('click', function () {
-    showHideLog(this);
-  });
+function addEventsToLogs() {
+  let logs = document.getElementById('logsUl').children;
+  for (let i = 0; i < logs.length; i++) {
+    logs[i].addEventListener('click', function () {
+      showHideLog(this);
+    });
+  }
 }
 
 // toggle displaying of log text
 function showHideLog(log) {
-  logText = log.querySelector('pre');
-  if (logText.style.display != 'none') logText.style.display = 'none';
-  else logText.style.display = 'block';
+  logPre = log.querySelector('pre');
+  if (logPre.style.display != 'none') logPre.style.display = 'none';
+  else logPre.style.display = 'block';
 }
 
 // replace static course options with options from API
-async function replaceCourseSelect() {
+async function refreshCourseSelect() {
   let courseSelect = document.getElementById('course');
   let courseOptionsLen = courseSelect.options.length;
   let url =
@@ -99,8 +101,10 @@ async function refreshLogs() {
 
     logsList.appendChild(logLi);
   }
-  document.getElementById('uvuIdSpan').innerText = json[0].uvuId;
   logsDiv.style.display = 'block';
+
+  document.getElementById('uvuIdSpan').innerText = uvuIdInput.value;
+  addEventsToLogs();
   document.querySelector('button').disabled = false;
 }
 
@@ -120,29 +124,20 @@ function postLog(event) {
   let time = `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} ${amPm}`;
 
   let json = {};
-  json.courseId = courseDropdown.value;
+  json.courseId = courseInput.value;
   json.uvuId = uvuIdInput.value;
   json.date = `${date}, ${time}`;
   json.text = document.getElementById('logBodyInput').value;
   json.id = createUUID();
 
   postData(
-    'https://json-server-5phigi--3000.local.webcontainer.io/api/v1/logs'
+    'https://json-server-5phigi--3000.local.webcontainer.io/api/v1/logs',
+    json
   );
 
   refreshLogs();
   document.getElementById('logBodyInput').value = '';
 }
-
-let testUrl =
-  'https://json-server-5phigi--3000.local.webcontainer.io/api/v1/logs';
-let testData = {
-  courseId: 'cs666',
-  uvuId: '10666666',
-  date: '1/23/2021 1:23:36 PM',
-  text: 'COVFEFE',
-  id: '420',
-};
 
 // return json from fetch
 async function fetchJson(src) {
@@ -151,7 +146,7 @@ async function fetchJson(src) {
   return myJson;
 }
 
-replaceCourseSelect();
+refreshCourseSelect();
 
 function createUUID() {
   return 'xxxxxxx'.replace(/[xy]/g, function (c) {
