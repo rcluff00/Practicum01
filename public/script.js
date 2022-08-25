@@ -1,16 +1,17 @@
-document.querySelector('button').setAttribute('disabled', '');
+// document.querySelector('button').setAttribute('disabled', '');
 
 let uvuIdInputDiv = document.getElementsByClassName('uvu-id')[0];
 let uvuIdInput = document.getElementById('uvuId');
 let courseDropdown = document.getElementById('course');
+let logsDiv = document.querySelector('.logs-div');
 
-uvuIdInput.value = '10234567';
+logsDiv.style.display = 'none';
 
 // show uvuId textbox after course is selected
 courseDropdown.onchange = function () {
   if (courseDropdown.selectedIndex != 0) {
     uvuIdInputDiv.style.display = 'block';
-    checkUvuId();
+    // checkUvuId();
   } else {
     uvuIdInputDiv.style.display = 'none';
   }
@@ -19,14 +20,9 @@ courseDropdown.onchange = function () {
 // check uvuId for proper input
 function checkUvuId() {
   input = uvuIdInput.value;
-  let regex = /^[0-9]{0,8}$/gm;
-  if (!regex.test(input)) {
-    input = input.substring(0, input.length - 1);
-    uvuIdInput.value = input;
-  } else {
-    if (input.length == 8) {
-      replaceLogs();
-    }
+
+  if (input.length == 8) {
+    replaceLogs();
   }
 }
 uvuIdInput.addEventListener('input', checkUvuId);
@@ -70,23 +66,51 @@ async function replaceCourseSelect() {
 
 // replace static course logs with logs from API
 async function replaceLogs() {
+  let logsList = document.getElementById('logsUl');
+
+  while (logsList.firstChild) {
+    logsList.removeChild(logsList.firstChild);
+  }
+
   let courseId = document.getElementById('course').value;
-  let studentNum = document.getElementById('uvuId').value;
+  let uvuId = document.getElementById('uvuId').value;
   let json = await fetchJson(
-    `https://json-server-5phigi--3000.local.webcontainer.io/logs?courseId=${courseId}&uvuId=${studentNum}`
+    `https://json-server-5phigi--3000.local.webcontainer.io/logs?courseId=${courseId}&uvuId=${uvuId}`
   );
-  console.log('json: ' + json);
+  for (log of json) {
+    let logLi = document.createElement('li');
 
-  let url = `https://json-server-5phigi--3000.local.webcontainer.io/logs?courseId=${courseId}&uvuId=${studentNum}&t=${Math.random()}`;
-  console.log('url: ' + url);
+    let small = document.createElement('small');
+    let div = document.createElement('div');
+    small.innerHTML = log.date;
+    div.appendChild(small);
+    logLi.appendChild(div);
 
-  const xhttp = new XMLHttpRequest();
-  xhttp.onload = function () {
-    console.log('this.status: ' + this.status);
-    console.log('this.response: ' + this.response);
-  };
-  xhttp.open('GET', url, true);
-  xhttp.send();
+    let pre = document.createElement('pre');
+    let p = document.createElement('p');
+    p.innerText = log.text;
+    pre.appendChild(p);
+    logLi.appendChild(pre);
+
+    logsList.appendChild(logLi);
+  }
+
+  logsDiv.style.display = 'block';
+
+  // let url = `https://json-server-5phigi--3000.local.webcontainer.io/logs?courseId=cs4660&uvuId=10111111`;
+  // console.log('url: ' + url);
+
+  // const xhttp = new XMLHttpRequest();
+  // xhttp.onload = function () {
+  //   console.log('this.status: ' + this.status);
+  //   console.log('this.response: ' + this.response);
+  //   let object = JSON.parse(this.response);
+  //   console.log('ojbect: ' + object);
+  // };
+  // xhttp.open('GET', url);
+  // xhttp.setRequestHeader('Content-Type', 'application/json');
+  // xhttp.send();
+  //
 }
 
 // return json from fetch
@@ -97,3 +121,10 @@ async function fetchJson(src) {
 }
 
 replaceCourseSelect();
+
+// function createUUID() {
+//   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+//      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+//      return v.toString(16);
+//   });
+// }

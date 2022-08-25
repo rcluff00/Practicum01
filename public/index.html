@@ -40,28 +40,38 @@
         <!-- X TODO: Ensure the character length never exceeds 8 -->
         <!-- X TODO: Only numbers, no letters or other characters-->
         <!-- TODO: When character length reaches 8 and it's only digits, fire off ajax request, if 200 or 304, display results, else appropriately guide the user. -->
-        <input type="text" id="uvuId" name="uvuId" data-cy="uvuId_input" />
+        <input
+          type="text"
+          id="uvuId"
+          name="uvuId"
+          data-cy="uvuId_input"
+          maxlength="8"
+          pattern="[0-9]{0,8}"
+          placeholder="10234567"
+        />
       </div>
       <!-- TODO: The following options are currently static values to show you an example.  -->
       <!-- You must replace them with dynamic data by ajaxing GET https://json-server-ft3qa5--3000.local.webcontainer.io/logs?courseId=<courseID>&uvuId=<uvuID> -->
-      <h3 id="uvuIdDisplay" data-cy="uvuIdDisplay">
-        Student Logs for 10234567
-      </h3>
-      <ul data-cy="logs">
-        <!-- X TODO: Click anywhere on the log to toggle visibility of the log (text only, not the date)-->
-        <li>
-          <div><small>1/23/2021 1:23:36 PM</small></div>
-          <pre><p>Initial comment. Hello World</p></pre>
-        </li>
-        <li>
-          <div><small>1/24/2021 2:43:12 PM</small></div>
-          <pre><p>MongoDB is looking really good, still need to get atlas up and running.</p></pre>
-        </li>
-        <li>
-          <div><small>1/27/2021 5:58:10 PM</small></div>
-          <pre><p>Atlas is up and running</p></pre>
-        </li>
-      </ul>
+      <div class="logs-div">
+        <h3 id="uvuIdDisplay" data-cy="uvuIdDisplay">
+          Student Logs for 10234567
+        </h3>
+        <ul data-cy="logs" id="logsUl">
+          <!-- X TODO: Click anywhere on the log to toggle visibility of the log (text only, not the date)-->
+          <li>
+            <div><small>1/23/2021 1:23:36 PM</small></div>
+            <pre><p>Initial comment. Hello World</p></pre>
+          </li>
+          <li>
+            <div><small>1/24/2021 2:43:12 PM</small></div>
+            <pre><p>MongoDB is looking really good, still need to get atlas up and running.</p></pre>
+          </li>
+          <li>
+            <div><small>1/27/2021 5:58:10 PM</small></div>
+            <pre><p>Atlas is up and running</p></pre>
+          </li>
+        </ul>
+      </div>
       <label>New Log</label><br />
       <textarea
         style="height: 75px"
@@ -70,7 +80,9 @@
       ></textarea
       ><br />
       <!-- TODO: Button should be disabled until there are logs displayed -->
-      <button type="submit" data-cy="add_log_btn">Add Log</button>
+      <!-- 1. Use fetch to post the new log above -->
+      <!-- 2. Add it to the displayed list -->
+      <button type="submit" data-cy="add_log_btn" disabled>Add Log</button>
     </form>
     <!-- X TODO: Script tag to your javascript file -->
     <script src="script.js"></script>
