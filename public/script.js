@@ -1,5 +1,3 @@
-// document.querySelector('button').setAttribute('disabled', '');
-
 let uvuIdInputDiv = document.getElementsByClassName('uvu-id')[0];
 let uvuIdInput = document.getElementById('uvuId');
 let courseDropdown = document.getElementById('course');
@@ -44,8 +42,7 @@ function showHideLog(log) {
 // replace static course options with options from API
 async function replaceCourseSelect() {
   let courseSelect = document.getElementById('course');
-  let courseOptions = courseSelect.options;
-  let courseOptionsLen = courseOptions.length;
+  let courseOptionsLen = courseSelect.options.length;
   let url =
     'https://json-server-5phigi--3000.local.webcontainer.io/api/v1/courses';
 
@@ -55,8 +52,7 @@ async function replaceCourseSelect() {
 
   let json = await fetchJson(url);
 
-  let courseJsonLen = json.length;
-  for (let i = 0; i < courseJsonLen; i++) {
+  for (let i = 0; i < json.length; i++) {
     let option = document.createElement('option');
     option.text = json[i].display;
     option.value = json[i].id;
@@ -68,15 +64,19 @@ async function replaceCourseSelect() {
 async function replaceLogs() {
   let logsList = document.getElementById('logsUl');
 
+  // clear log list
   while (logsList.firstChild) {
     logsList.removeChild(logsList.firstChild);
   }
 
+  // fetch log info
   let courseId = document.getElementById('course').value;
   let uvuId = document.getElementById('uvuId').value;
   let json = await fetchJson(
     `https://json-server-5phigi--3000.local.webcontainer.io/logs?courseId=${courseId}&uvuId=${uvuId}`
   );
+
+  //print log info
   for (log of json) {
     let logLi = document.createElement('li');
 
@@ -94,24 +94,28 @@ async function replaceLogs() {
 
     logsList.appendChild(logLi);
   }
-
+  document.getElementById('uvuIdSpan').innerText = log.uvuId;
   logsDiv.style.display = 'block';
-
-  // let url = `https://json-server-5phigi--3000.local.webcontainer.io/logs?courseId=cs4660&uvuId=10111111`;
-  // console.log('url: ' + url);
-
-  // const xhttp = new XMLHttpRequest();
-  // xhttp.onload = function () {
-  //   console.log('this.status: ' + this.status);
-  //   console.log('this.response: ' + this.response);
-  //   let object = JSON.parse(this.response);
-  //   console.log('ojbect: ' + object);
-  // };
-  // xhttp.open('GET', url);
-  // xhttp.setRequestHeader('Content-Type', 'application/json');
-  // xhttp.send();
-  //
+  document.querySelector('button').disabled = false;
 }
+
+function postData(url, data) {
+  fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+}
+
+let testUrl = `https://json-server-5phigi--3000.local.webcontainer.io/logs`;
+let testData = {
+  courseId: 'cs666',
+  uvuId: '10666666',
+  date: '1/23/2021 1:23:36 PM',
+  text: 'COVFEFE',
+  id: '420',
+};
+postData(testUrl, testData);
 
 // return json from fetch
 async function fetchJson(src) {
