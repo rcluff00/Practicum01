@@ -103,7 +103,7 @@ async function refreshLogs() {
   }
   logsDiv.style.display = 'block';
 
-  document.getElementById('uvuIdSpan').innerText = uvuIdInput.value;
+  document.getElementById('uvuIdSpan').innerText = `for ${uvuIdInput.value}`;
   addEventsToLogs();
   document.querySelector('button').disabled = false;
 }

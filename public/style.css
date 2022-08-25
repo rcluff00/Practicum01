@@ -17,7 +17,7 @@ form {
 
 .form-section {
   padding: 1rem;
-  background-color: rgb(27, 30, 32);
+  background-color: rgb(30, 36, 43);
   border-radius: 0.25rem;
   margin-bottom: 1rem;
 }
@@ -44,12 +44,12 @@ input {
 
 h3 {
   margin-top: 0;
-  margin-bottom: 0.5rem;
-  color: rgb(151 208 244);
+  margin-bottom: 1rem;
+  color: rgb(151, 208, 244);
 }
 
 label {
-  color: rgb(129 142 150);
+  color: #a9a9a9;
   margin-bottom: 0.25rem;
   display: inline-block;
   font-weight: 600;
@@ -69,7 +69,7 @@ ul {
 ul small {
   font-weight: 600;
   font-size: 1rem;
-  color: rgb(151 208 244);
+  color: rgb(151, 226, 196);
 }
 
 ul pre {
@@ -86,27 +86,30 @@ ul pre p {
 }
 
 ul li {
-  padding: 0.5rem 0.75rem;
-  /* border: solid 1px rgb(151 208 244); */
+  padding: 0.75rem 0.75rem;
   border: none;
   background-color: rgb(49, 53, 56);
   margin-bottom: 0.5rem;
   border-radius: 0.25rem;
   transition: all 0.5s ease;
 }
+ul li:hover {
+  background-color: rgb(56, 60, 63);
+}
 
 button {
   border-radius: 0.25rem;
   padding: 0.5rem 1rem;
-  background-color: rgb(151 208 244);
+  background-color: rgb(151, 226, 196);
   border: none;
-  color: white;
+  color: black;
 }
 button:hover {
-  background-color: rgb(64, 129, 170);
+  background-color: rgb(151, 226, 196);
+  transition: all 0.25s;
 }
 button:disabled,
 button[disabled] {
-  background-color: rgb(44, 51, 58);
-  color: rgb(129 142 150);
+  background-color: #a9a9a9;
+  color: rgb(87, 87, 87);
 }
