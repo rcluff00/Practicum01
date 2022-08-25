@@ -107,6 +107,8 @@ button {
 button:hover {
   background-color: rgb(64, 129, 170);
 }
-button:disabled, button[disabled] {
-  background-color: grey;
+button:disabled,
+button[disabled] {
+  background-color: rgb(44, 51, 58);
+  color: grey;
 }

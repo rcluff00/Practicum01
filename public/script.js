@@ -8,7 +8,7 @@ document.getElementById('logForm').addEventListener('submit', function (event) {
   event.preventDefault();
 });
 
-document.getElementById('submit').addEventListener('click', postData);
+document.getElementById('submit').addEventListener('click', postLog);
 
 // show uvuId textbox after course is selected
 courseDropdown.onchange = function () {
@@ -25,7 +25,7 @@ function checkUvuId() {
   input = uvuIdInput.value;
 
   if (input.length == 8) {
-    replaceLogs();
+    refreshLogs();
   }
 }
 uvuIdInput.addEventListener('input', checkUvuId);
@@ -66,7 +66,7 @@ async function replaceCourseSelect() {
 }
 
 // replace static course logs with logs from API
-async function replaceLogs() {
+async function refreshLogs() {
   let logsList = document.getElementById('logsUl');
 
   // clear log list
@@ -118,17 +118,20 @@ function postLog(event) {
   let date = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
   let amPm = d.getHours() < 12 ? 'AM' : 'PM';
   let time = `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} ${amPm}`;
+
   let json = {};
   json.courseId = courseDropdown.value;
   json.uvuId = uvuIdInput.value;
   json.date = `${date}, ${time}`;
-  json.text = document.getElementById('logBody').value;
+  json.text = document.getElementById('logBodyInput').value;
   json.id = createUUID();
 
   postData(
-    'https://json-server-5phigi--3000.local.webcontainer.io/api/v1/logs',
-    json
+    'https://json-server-5phigi--3000.local.webcontainer.io/api/v1/logs'
   );
+
+  refreshLogs();
+  document.getElementById('logBodyInput').value = '';
 }
 
 let testUrl =
