@@ -99,23 +99,24 @@ async function replaceLogs() {
   document.querySelector('button').disabled = false;
 }
 
-function postData(url, data) {
-  fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-  });
-}
+// function postData(url, data) {
+//   fetch(url, {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify(data),
+//   });
+// }
 
-let testUrl = `https://json-server-5phigi--3000.local.webcontainer.io/logs`;
-let testData = {
-  courseId: 'cs666',
-  uvuId: '10666666',
-  date: '1/23/2021 1:23:36 PM',
-  text: 'COVFEFE',
-  id: '420',
-};
-postData(testUrl, testData);
+// let testUrl =
+//   'https://json-server-5phigi--3000.local.webcontainer.io/api/v1/logs';
+// let testData = {
+//   courseId: 'cs666',
+//   uvuId: '10666666',
+//   date: '1/23/2021 1:23:36 PM',
+//   text: 'COVFEFE',
+//   id: '420',
+// };
+// postData(testUrl, testData);
 
 // return json from fetch
 async function fetchJson(src) {
