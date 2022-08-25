@@ -48,6 +48,34 @@
       "date": "1/23/2021 1:23:36 PM",
       "text": "COVFEFE",
       "id": "420"
+    },
+    {
+      "courseId": "cs3380",
+      "uvuId": "10333333",
+      "date": "8/25/2022, 12:45:19 PM",
+      "text": "fuck yeah?",
+      "id": "6b6ff44"
+    },
+    {
+      "courseId": "cs3380",
+      "uvuId": "10333333",
+      "date": "8/25/2022, 12:47:47 PM",
+      "text": "fuck yeah!",
+      "id": "ff0ffc6"
+    },
+    {
+      "courseId": "cs4690",
+      "uvuId": "10333333",
+      "date": "8/25/2022, 12:48:8 PM",
+      "text": "fuck yeah!",
+      "id": "96ffb4b"
+    },
+    {
+      "courseId": "cs4690",
+      "uvuId": "10333333",
+      "date": "8/25/2022, 12:48:48 PM",
+      "text": "fuck me!",
+      "id": "c91d411"
     }
   ],
   "courses": [

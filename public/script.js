@@ -4,7 +4,11 @@ let courseDropdown = document.getElementById('course');
 let logsDiv = document.querySelector('.logs-div');
 logsDiv.style.display = 'none';
 
-document.getElementById('logForm').addEventListener('submit', postLog);
+document.getElementById('logForm').addEventListener('submit', function (event) {
+  event.preventDefault();
+});
+
+document.getElementById('submit').addEventListener('click', postData);
 
 // show uvuId textbox after course is selected
 courseDropdown.onchange = function () {
@@ -95,7 +99,7 @@ async function replaceLogs() {
 
     logsList.appendChild(logLi);
   }
-  document.getElementById('uvuIdSpan').innerText = log.uvuId;
+  document.getElementById('uvuIdSpan').innerText = json[0].uvuId;
   logsDiv.style.display = 'block';
   document.querySelector('button').disabled = false;
 }
@@ -109,12 +113,22 @@ function postData(url, data) {
 }
 
 function postLog(event) {
-  let json = {};
   event.preventDefault();
-  json.text = document.getElementById('logBody').value;
-  json.courseId = courseDropdownvalue;
+  let d = new Date();
+  let date = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+  let amPm = d.getHours() < 12 ? 'AM' : 'PM';
+  let time = `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} ${amPm}`;
+  let json = {};
+  json.courseId = courseDropdown.value;
   json.uvuId = uvuIdInput.value;
+  json.date = `${date}, ${time}`;
+  json.text = document.getElementById('logBody').value;
+  json.id = createUUID();
 
+  postData(
+    'https://json-server-5phigi--3000.local.webcontainer.io/api/v1/logs',
+    json
+  );
 }
 
 let testUrl =
@@ -136,9 +150,10 @@ async function fetchJson(src) {
 
 replaceCourseSelect();
 
-// function createUUID() {
-//   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-//      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-//      return v.toString(16);
-//   });
-// }
+function createUUID() {
+  return 'xxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0,
+      v = c == 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
