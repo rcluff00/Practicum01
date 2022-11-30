@@ -50,8 +50,7 @@ function showHideLog(log) {
 async function refreshCourseSelect() {
   let courseSelect = document.getElementById('course');
   let courseOptionsLen = courseSelect.options.length;
-  let url =
-    'https://json-server-5phigi--3000.local.webcontainer.io/api/v1/courses';
+  let url = 'https://localhost:3000/api/v1/courses';
 
   for (let i = 1; i < courseOptionsLen; i++) {
     courseSelect.remove(1);
@@ -80,7 +79,7 @@ async function refreshLogs() {
   let courseId = document.getElementById('course').value;
   let uvuId = document.getElementById('uvuId').value;
   let json = await fetchJson(
-    `https://json-server-5phigi--3000.local.webcontainer.io/api/v1/logs?courseId=${courseId}&uvuId=${uvuId}`
+    `https://localhost:3000/api/v1/logs?courseId=${courseId}&uvuId=${uvuId}`
   );
 
   //print log info
@@ -130,10 +129,7 @@ function postLog(event) {
   json.text = document.getElementById('logBodyInput').value;
   json.id = createUUID();
 
-  postData(
-    'https://json-server-5phigi--3000.local.webcontainer.io/api/v1/logs',
-    json
-  );
+  postData('https://localhost:3000/api/v1/logs', json);
 
   refreshLogs();
   document.getElementById('logBodyInput').value = '';
